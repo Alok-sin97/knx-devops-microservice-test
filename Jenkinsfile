@@ -1,9 +1,8 @@
 pipeline {
     environment {
         IMAGE_NAME = "alok4697/devops"
-        Docker_Regitry = 'docker.io/alok4697/devops'
-        USR = 'alok4697'
-        PWD = 'Aloksingh@1997'
+        dockerHubCredentials = 'admins'
+        TAG = 'latest'
         
     }
  
@@ -18,7 +17,7 @@ pipeline {
  
         stage('Building image') {
             steps {
-                     sh "sudo docker build -t ${IMAGE_NAME}:latest ."
+                     sh "sudo docker build -t ${IMAGE_NAME}:${TAG} ."
                      echo "Docker build succeeded"
                 }
             }
@@ -27,11 +26,11 @@ pipeline {
              steps {
                 script {
            
-                    withCredentials([usernamePassword(credentialsId: admins, usernameVariable: 'USR', passwordVariable: 'PWD')]) {
-                        sh "docker login -u $USR -p $PWD"
+                    withCredentials([usernamePassword(credentialsId: dockerHubCredentials, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
  
                         
-                        sh "docker push ${Docker_Regitry}/${IMAGE_NAME}:latest"
+                        sh "docker push ${IMAGE_NAME}:${TAG}"
                         echo "Docker Image push Successfull"
                     }
              }
