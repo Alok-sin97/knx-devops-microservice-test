@@ -2,7 +2,7 @@ pipeline {
     environment {
         IMAGE_NAME = "alok4697/devops"
         dockerHubCredentials = 'admins'
-        TAG = 'latest'
+        TAG = 'jb-${BUILD_NUMBER}'
         
     }
  
