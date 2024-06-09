@@ -1,6 +1,9 @@
 pipeline {
     environment {
         imagename = "devops"
+        dockerHub = 'alok4697'
+        DOCKER_USERNAME = 'alok4697'
+        DOCKER_PASSWORD = 'Aloksingh@1997'
     }
  
     agent any
@@ -18,5 +21,19 @@ pipeline {
                      echo "Docker build succeeded"
                 }
             }
+ 
+         stage('Docker Image Push') {
+             steps {
+                script {
+                    // Use Jenkins credentials for Docker Hub login
+                    withCredentials([usernamePassword(credentialsId: dockerHub, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+ 
+                        // Push the image
+                        sh "docker push ${imagename}:latest"
+                    }
+             }
+
         }
-    }
+    }  
+  }
