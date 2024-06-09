@@ -1,8 +1,6 @@
 pipeline {
     environment {
-        IMAGE_NAME = "devops"
-        USR = "alok4697"
-        PWD = "Aloksingh@197"
+        IMAGE_NAME = "alok4697/devops"
     }
  
     agent any
