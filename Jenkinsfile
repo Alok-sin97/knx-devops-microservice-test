@@ -1,9 +1,8 @@
 pipeline {
     environment {
-        imagename = "devops"
+        IMAGE_NAME = "devops"
         USR = "alok4697"
-        PWD = "Aloksingh@1997"
-        
+        PWD = "Aloksingh@197"
     }
  
     agent any
@@ -17,7 +16,7 @@ pipeline {
  
         stage('Building image') {
             steps {
-                     sh "sudo docker build -t ${imagename}:latest ."
+                     sh "sudo docker build -t ${IMAGE_NAME}:latest ."
                      echo "Docker build succeeded"
                 }
             }
@@ -26,7 +25,7 @@ pipeline {
              steps {
                 script {
                     // Use Jenkins credentials for Docker Hub login
-                    withCredentials([usernamePassword(credentialsId: dockerHub, usernameVariable: 'USR', passwordVariable: 'PWD')]) {
+                    withCredentials([usernamePassword(credentialsId: dockerHubCredentials, usernameVariable: 'USR', passwordVariable: 'PWD')]) {
                         sh "docker login -u $USR -p $PWD"
  
                         // Push the image
