@@ -1,6 +1,7 @@
 pipeline {
     environment {
         IMAGE_NAME = "alok4697/devops"
+        dockerHubCredentials = 'admins'
     }
  
     agent any
