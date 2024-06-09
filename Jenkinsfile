@@ -1,26 +1,22 @@
-#!/usr/bin/env groovy
 pipeline {
-    agent {
-        node any
+    environment {
+        imagename = "devops"
     }
-
+ 
+    agent any
+ 
     stages {
-        stage('Build Image') {
-            when {
-                branch 'master'  //only run these steps on the master branch
+        stage('Cloning Git') {
+            steps {
+                git([url: 'https://github.com/Alok-sin97/knx-devops-microservice-test.git', branch: 'main'])
             }
-
-            // Jenkins Stage to Build the Docker Image
-
         }
-
-        stage('Publish Image') {
-            when {
-                branch 'master'  //only run these steps on the master branch
+ 
+        stage('Building image') {
+            steps {
+                     sh "docker build -t ${imagename}:latest ,"
+                     echo "Docker build succeeded"
+                }
             }
-            
-            // Jenkins Stage to Publish the Docker Image to Dockerhub or any Docker repository of your choice.
-
         }
     }
-}
