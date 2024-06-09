@@ -14,7 +14,7 @@ pipeline {
  
         stage('Building image') {
             steps {
-                     sh "docker build -t ${imagename}:latest ."
+                     sh "sudo docker build -t ${imagename}:latest ."
                      echo "Docker build succeeded"
                 }
             }
