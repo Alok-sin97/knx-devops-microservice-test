@@ -2,8 +2,6 @@ pipeline {
     environment {
         imagename = "devops"
         dockerHub = 'alok4697'
-        DOCKER_USERNAME = 'alok4697'
-        DOCKER_PASSWORD = 'Aloksingh@1997'
     }
  
     agent any
