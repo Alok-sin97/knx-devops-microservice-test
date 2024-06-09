@@ -29,7 +29,7 @@ pipeline {
                         sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
  
                         // Push the image
-                        sh "docker push ${imagename}:latest"
+                        sh "docker push ${IMAGE_NAME}:latest"
                     }
              }
 
